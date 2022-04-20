@@ -33,6 +33,7 @@ class App(tk.Frame):
         
         self.firstMenu.add_command(label="My Github", command=lambda: webbrowser.open("https://github.com/Titi0603"))
         self.firstMenu.add_command(label="My Modpack Minecraft", command=lambda: webbrowser.open("https://www.curseforge.com/minecraft/modpacks/cyber-craft"))
+        self.firstMenu.add_command(label="Diavo", command=lambda: webbrowser.open("https://www.youtube.com/channel/UCgVFOK24H2TZOv2AqGZgJIw/featured"))
         self.firstMenu.add_command(label="Quitter", command=self.master.quit)
 
         # deuxième partie du menu
