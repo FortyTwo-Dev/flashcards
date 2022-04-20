@@ -70,9 +70,10 @@ class App(tk.Frame):
             self.contents2 = str(self.contents2.get())
             b = FlashCB.write(self.contents2)
             FlashCB.close()
+            print(a)
+            print(b)
             self.contents1 = StringVar()
             self.contents2 = StringVar()
-            
 
         self.entrythingy["textvariable"] = self.contents1
         self.entrythingy2["textvariable"] = self.contents2
