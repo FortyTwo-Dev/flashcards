@@ -1,4 +1,3 @@
-from imp import reload
 import random
 from tkinter import*
 import tkinter as tk
