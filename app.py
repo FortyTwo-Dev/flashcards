@@ -1,4 +1,4 @@
-import random
+from random import*
 from tkinter import*
 import tkinter as tk
 from tkinter import messagebox
@@ -24,6 +24,55 @@ class App(tk.Frame):
         self.contents1.set("new")
         self.contents2.set("new")
 
+        # fonction aléatoire pour choisir une flashcards
+
+        def aléaFlashCards(*args):
+          def openSecond():
+            lb2.pack(expand=1)
+
+          def closeWindow():
+            windowFlashcards1.quit() and windowFlashcards2.quit()
+
+          ficverify = open("variable/flashcardsnomber.txt", "r", encoding="utf-8")
+          i = ficverify.read()
+          i = int(i)
+          number = str(randint(1, i))
+          aOrb = randint(0,1)
+          if aOrb == 0:
+            aOrb = "a"
+            otheraOrb = "b"
+          else:
+            aOrb = "b"
+            otheraOrb = "a"
+          openAleaFichier = open("flashcards/"+ number + aOrb + ".txt", "r", encoding="utf-8")
+          openOtherFichier = open("flashcards/"+ number + otheraOrb + ".txt", "r", encoding="utf-8")
+
+          windowFlashcards1 = tkinter.Toplevel(self.master)
+          windowFlashcards2 = tkinter.Toplevel(self.master)
+
+          windowFlashcards1.title("FlashCards1")
+          windowFlashcards2.title("FlashCards2")
+
+          lb1 = tkinter.Message(windowFlashcards1, text=openAleaFichier.read())
+          lb2 = tkinter.Message(windowFlashcards2, text=openOtherFichier.read())
+
+          windowFlashcards1.geometry("300x300")
+          windowFlashcards2.geometry("300x300")
+
+          windowFlashcards1.minsize(300, 300)
+          windowFlashcards1.maxsize(600, 600)
+          windowFlashcards2.minsize(300, 300)
+          windowFlashcards2.maxsize(600, 600)
+
+          bottomWFC = Button(windowFlashcards1, fg='black', command=openSecond, font=("A"), width=4, height=1, text="Next")
+          bottomWFC.pack(padx=10, pady=8)
+          bottomClose = Button(windowFlashcards2, fg='black', command=closeWindow, font=("A"), width=4, height=1, text="Close")
+          bottomClose.pack(padx=10, pady=8)
+
+          lb1.pack(expand=1)
+          openAleaFichier.close()
+          openOtherFichier.close()
+
         # Creation d'un menu
         self.mainMenu = tk.Menu()
 
@@ -38,7 +87,7 @@ class App(tk.Frame):
         # deuxième partie du menu
         self.secondMenu = tk.Menu(self.mainMenu, tearoff=0)
 
-        self.secondMenu.add_command(label="Go to choice flashcarg aléa")
+        self.secondMenu.add_command(label="Go to choice flashcarg aléa", command=aléaFlashCards)
 
         # ajout des menus
         self.mainMenu.add_cascade(label="Menu", menu=self.firstMenu)
@@ -63,25 +112,19 @@ class App(tk.Frame):
             print(i)
             ficadd.close()
             FlashCA = open("flashcards/"+ i+ "a.txt", "x", encoding="utf-8")
-            self.contents1 = str(self.contents1.get())
-            a = FlashCA.write(self.contents1)
+            a = FlashCA.write(str(self.contents1.get()))
             FlashCA.close()
             FlashCB = open("flashcards/"+ i+ "b.txt", "x", encoding="utf-8")
-            self.contents2 = str(self.contents2.get())
-            b = FlashCB.write(self.contents2)
+            b = FlashCB.write((str(self.contents2.get())))
             FlashCB.close()
-            print(a)
-            print(b)
-            self.contents1 = StringVar()
-            self.contents2 = StringVar()
 
         self.entrythingy["textvariable"] = self.contents1
         self.entrythingy2["textvariable"] = self.contents2
 
         # add botton
-        self.bottom = tk.Button(fg='black', font=("A"), command=butAction, width=4, height=1, text="save")
+        self.bottom = Button(fg='black', font=("A"), command=butAction, width=4, height=1, text="save")
         self.bottom.pack(padx=10, pady=8)
-        
+
         # va avec butAction
         self.text_1.trace("w", update_Text)
         self.text_2.trace("w", update_Text)
@@ -90,7 +133,6 @@ class App(tk.Frame):
         self.master.text_1 = Message(fg='black', textvariable=self.contents1, font=("Arial", 15), bg='#a2a2a6')
         self.master.text_0 = Label(fg='black', text=separ, font=("Arial", 15), bg='#a2a2a6')
         self.master.text_2 = Message(fg='black', textvariable=self.contents2, font=("Arial", 15), bg='#a2a2a6')
-        
        
 # réglage
 myapp = App()
