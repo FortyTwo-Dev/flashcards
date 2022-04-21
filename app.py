@@ -92,6 +92,7 @@ class App(tk.Frame):
         # ajout des menus
         self.mainMenu.add_cascade(label="Menu", menu=self.firstMenu)
         self.mainMenu.add_cascade(label="play", menu=self.secondMenu)
+        
         # fonction syncrho text inserte_Text
         def update_Text(*args):
           self.text_1.set(self.contents1.get())
