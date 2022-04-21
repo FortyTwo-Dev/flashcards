@@ -31,12 +31,13 @@ class App(tk.Frame):
             lb2.pack(expand=1)
 
           def closeWindow():
-            windowFlashcards1.quit() and windowFlashcards2.quit()
+            windowFlashcards1.destroy()
+            windowFlashcards2.destroy()
 
           ficverify = open("variable/flashcardsnomber.txt", "r", encoding="utf-8")
           i = ficverify.read()
           i = int(i)
-          number = str(randint(1, i))
+          number = str(randint(0, i))
           aOrb = randint(0,1)
           if aOrb == 0:
             aOrb = "a"
@@ -92,7 +93,6 @@ class App(tk.Frame):
         # ajout des menus
         self.mainMenu.add_cascade(label="Menu", menu=self.firstMenu)
         self.mainMenu.add_cascade(label="play", menu=self.secondMenu)
-        
         # fonction syncrho text inserte_Text
         def update_Text(*args):
           self.text_1.set(self.contents1.get())
@@ -148,29 +148,3 @@ myapp.master.text_2.pack(expand=1)
 
 myapp.master.config(menu = myapp.mainMenu)
 myapp.mainloop()
-
-# myFile = open(".txt", "w")
-
-# myFile.write("")
-
-# myFile.close()
-
-"""
-génération aléatoire
-nombre aléatoire
-Lettre aléatoire
-
-aléa + aléaLettre + ".txt"
-
-lecture avec r
-
-du premier fichier puis lecture du deuxième 
-condition
-  if a ou b:
-    a 
-    OR
-    b
-
-
-random
-"""
